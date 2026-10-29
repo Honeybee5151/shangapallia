@@ -1,0 +1,4 @@
+# Keep original local draft filename out of the public repo (published cleanly as assets/idea-fragments.pdf)
+untitledadadbookj.pdf
+.DS_Store
+Thumbs.db
