@@ -718,6 +718,45 @@ body.reader-open {
   color: var(--text-muted);
 }
 
+.card-meta-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.card-research-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.71rem;
+  font-weight: 500;
+  color: #b7ebc0;
+  background: rgba(111, 175, 98, 0.13);
+  border: 1px solid rgba(111, 175, 98, 0.34);
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.16s ease, border-color 0.16s ease, transform 0.16s ease;
+}
+
+.card-research-pill:hover {
+  background: rgba(111, 175, 98, 0.24);
+  border-color: rgba(111, 175, 98, 0.6);
+  transform: translateY(-1px);
+}
+
+.research-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-leaf);
+  box-shadow: 0 0 6px var(--accent-leaf);
+  flex-shrink: 0;
+}
+
 .card-category {
   font-size: 0.74rem;
   font-weight: 500;
@@ -1116,6 +1155,19 @@ mark.search-hit {
   flex-shrink: 0;
 }
 
+.toc-item-label {
+  flex: 1;
+}
+
+.toc-research-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-leaf);
+  flex-shrink: 0;
+  align-self: center;
+}
+
 /* Reader Scrollable Article */
 .reader-scroll {
   flex: 1;
@@ -1219,6 +1271,346 @@ mark.search-hit {
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   font-size: calc(var(--reader-font-size) * 0.93);
   line-height: 1.7;
+}
+
+/* Reader Tabs (Original Fragment vs AI Research Dossier) */
+.reader-tabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.28rem;
+  margin: 0 0 1.85rem;
+  border-radius: 10px;
+  background: rgba(128, 128, 160, 0.09);
+  border: 1px solid var(--reader-border);
+}
+
+.reader-tab {
+  background: transparent;
+  border: none;
+  color: var(--reader-muted);
+  font-family: var(--font-sans);
+  font-size: 0.83rem;
+  font-weight: 600;
+  padding: 0.45rem 0.85rem;
+  border-radius: 7px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: background-color 0.16s ease, color 0.16s ease, box-shadow 0.16s ease;
+}
+
+.reader-tab:hover {
+  color: var(--reader-text);
+}
+
+.reader-tab.active {
+  background: var(--reader-bg);
+  color: var(--reader-text);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.reader-tab-badge {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 0.08rem 0.42rem;
+  border-radius: 999px;
+  background: rgba(128, 128, 160, 0.14);
+  color: var(--reader-secondary);
+}
+
+.reader-tab-badge--active {
+  background: rgba(111, 175, 98, 0.2);
+  color: #6faf62;
+}
+
+.reader-shell[data-surface="paper"] .reader-tab-badge--active {
+  background: rgba(69, 124, 68, 0.16);
+  color: #2f6b2e;
+}
+
+/* AI Research Dossier View */
+.dossier-view {
+  font-family: var(--font-sans);
+  color: var(--reader-secondary);
+}
+
+.dossier-hero-card {
+  background: rgba(128, 128, 160, 0.07);
+  border: 1px solid var(--reader-border);
+  border-radius: var(--radius-md);
+  padding: 1.35rem 1.4rem;
+  margin-bottom: 1.75rem;
+}
+
+.dossier-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.85rem;
+}
+
+.dossier-stage-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--reader-accent);
+  background: rgba(242, 176, 23, 0.12);
+  border: 1px solid rgba(242, 176, 23, 0.3);
+  padding: 0.24rem 0.68rem;
+  border-radius: 999px;
+}
+
+.dossier-stage-pill--queued {
+  color: var(--reader-muted);
+  background: rgba(128, 128, 160, 0.1);
+  border-color: var(--reader-border);
+}
+
+.dossier-pct {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--reader-text);
+}
+
+.dossier-bar-track {
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(128, 128, 160, 0.16);
+  overflow: hidden;
+  margin-bottom: 0.9rem;
+}
+
+.dossier-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent-gold) 0%, var(--accent-leaf) 100%);
+  transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dossier-agent-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  font-family: var(--font-mono);
+  font-size: 0.73rem;
+  color: var(--reader-muted);
+  margin-bottom: 0.95rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--reader-border);
+}
+
+.dossier-summary {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 1.12rem;
+  line-height: 1.65;
+  color: var(--reader-text);
+}
+
+.dossier-section {
+  margin-bottom: 2rem;
+}
+
+.dossier-section-title {
+  margin: 0 0 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--reader-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.dossier-section-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--reader-border);
+}
+
+/* Milestone Checklist */
+.milestone-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.milestone-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 0.62rem 0.85rem;
+  border-radius: var(--radius-sm);
+  background: rgba(128, 128, 160, 0.05);
+  border: 1px solid var(--reader-border);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.milestone-item--done {
+  color: var(--reader-text);
+}
+
+.milestone-item--pending {
+  color: var(--reader-muted);
+}
+
+.milestone-check {
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.milestone-item--done .milestone-check {
+  background: rgba(111, 175, 98, 0.2);
+  border: 1px solid rgba(111, 175, 98, 0.55);
+  color: #6faf62;
+}
+
+.reader-shell[data-surface="paper"] .milestone-item--done .milestone-check {
+  color: #2f6b2e;
+  border-color: rgba(47, 107, 46, 0.45);
+}
+
+.milestone-item--pending .milestone-check {
+  border: 1.5px dashed var(--reader-muted);
+}
+
+/* Findings Cards */
+.findings-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.finding-card {
+  padding: 1.1rem 1.2rem;
+  border-radius: var(--radius-sm);
+  background: rgba(128, 128, 160, 0.055);
+  border: 1px solid var(--reader-border);
+}
+
+.finding-title {
+  margin: 0 0 0.45rem;
+  font-family: var(--font-serif);
+  font-size: 1.16rem;
+  font-weight: 500;
+  color: var(--reader-text);
+}
+
+.finding-detail {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.68;
+  color: var(--reader-secondary);
+}
+
+/* Citations List */
+.citations-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.citation-card {
+  padding: 0.9rem 1.05rem;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--reader-accent);
+  background: rgba(128, 128, 160, 0.05);
+}
+
+.citation-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.25rem;
+}
+
+.citation-title {
+  font-family: var(--font-serif);
+  font-size: 1.03rem;
+  font-weight: 500;
+  color: var(--reader-text);
+  text-decoration: none;
+}
+
+a.citation-title:hover {
+  color: var(--reader-accent);
+  text-decoration: underline;
+}
+
+.citation-authors {
+  font-family: var(--font-mono);
+  font-size: 0.73rem;
+  color: var(--reader-muted);
+}
+
+.citation-relevance {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--reader-secondary);
+}
+
+/* Next Steps */
+.next-steps-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.91rem;
+  line-height: 1.58;
+  color: var(--reader-secondary);
+}
+
+.agent-dispatch-hint {
+  margin-top: 1.25rem;
+  padding: 0.95rem 1.1rem;
+  border-radius: var(--radius-sm);
+  border: 1px dashed var(--reader-border);
+  background: rgba(242, 176, 23, 0.05);
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--reader-secondary);
+}
+
+.agent-dispatch-hint code {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--reader-accent);
+  background: rgba(128, 128, 160, 0.12);
+  padding: 0.12rem 0.38rem;
+  border-radius: 4px;
 }
 
 /* Reader Pagination */

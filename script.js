@@ -1,10 +1,14 @@
 /**
- * Shangapallia — Interactive Idea Fragments Reader & Archive
+ * Shangapallia — Interactive Idea Fragments Reader & AI Research Dossier
  */
 (function () {
   "use strict";
 
   const fragments = Array.isArray(window.IDEA_FRAGMENTS) ? window.IDEA_FRAGMENTS : [];
+  let researchStore =
+    window.IDEA_RESEARCH && typeof window.IDEA_RESEARCH.dossiers === "object"
+      ? window.IDEA_RESEARCH.dossiers
+      : {};
 
   // Enrich fragments with plain text & reading time metadata
   const enrichedFragments = fragments.map((frag, index) => {
@@ -23,7 +27,8 @@
       excerpt: firstBlockText,
       wordCount,
       readMinutes,
-      isLongForm: wordCount > 350
+      isLongForm: wordCount > 350,
+      isResearchable: frag.id !== "0"
     };
   });
 
@@ -32,6 +37,7 @@
   let activeCategory = "all";
   let searchQuery = "";
   let currentReaderId = null;
+  let currentReaderTab = "fragment"; // "fragment" | "research"
   let fontSizeRem = parseFloat(localStorage.getItem("shangapallia_fontsize") || "1.2");
   if (Number.isNaN(fontSizeRem) || fontSizeRem < 0.95 || fontSizeRem > 1.6) {
     fontSizeRem = 1.2;
@@ -92,6 +98,34 @@
     return safe.replace(re, '<mark class="search-hit">$1</mark>');
   }
 
+  function getDossier(fragmentId) {
+    const d = researchStore[String(fragmentId)];
+    if (d && typeof d === "object") return d;
+    return {
+      fragmentId: String(fragmentId),
+      stage: "Queued",
+      progress: 0,
+      updatedAt: null,
+      agentName: null,
+      summary:
+        "This idea fragment is queued in the research pipeline and ready for an AI Research Agent to investigate.",
+      milestones: [
+        { label: "Core thesis & testable claims decomposition", done: false },
+        { label: "Academic literature & historical precedents mapping", done: false },
+        { label: "Counterargument & edge-case stress-testing", done: false },
+        { label: "Experiment, model, or prototype blueprint", done: false },
+        { label: "Final research synthesis", done: false }
+      ],
+      findings: [],
+      citations: [],
+      nextSteps: [
+        "Decompose core assumptions and define measurable variables.",
+        "Survey peer-reviewed literature across related disciplines.",
+        "Evaluate strongest counterarguments and design an empirical test or prototype."
+      ]
+    };
+  }
+
   // Build Topic Filter Pills
   function renderTopicPills() {
     const categories = ["all", ...new Set(enrichedFragments.map((f) => f.category))];
@@ -111,13 +145,18 @@
       if (activePart !== "all" && frag.part !== activePart) return false;
       if (activeCategory !== "all" && frag.category !== activeCategory) return false;
       if (q) {
+        const dossier = researchStore[frag.id];
+        const dossierText = dossier
+          ? [dossier.stage, dossier.summary, ...(dossier.findings || []).map((x) => x.title + " " + x.detail)].join(" ")
+          : "";
         const haystack = [
           frag.numberLabel,
           frag.part,
           frag.category,
           frag.title,
           frag.lead || "",
-          frag.plainBody
+          frag.plainBody,
+          dossierText
         ]
           .join(" ")
           .toLowerCase();
@@ -129,11 +168,11 @@
 
   // Render Single Card HTML
   function renderCard(frag) {
-    const featuredClass = frag.isLongForm && activePart === "all" && !searchQuery.trim()
-      ? " fragment-card--featured"
-      : "";
+    const featuredClass =
+      frag.isLongForm && activePart === "all" && !searchQuery.trim()
+        ? " fragment-card--featured"
+        : "";
 
-    // Build excerpt around search query if searching
     let excerptText = frag.excerpt;
     const q = searchQuery.trim().toLowerCase();
     if (q && !excerptText.toLowerCase().includes(q)) {
@@ -149,8 +188,19 @@
     }
 
     const titleHtml = highlightMatches(frag.title, searchQuery);
-    const leadHtml = frag.lead ? `<p class="card-lead">${highlightMatches(frag.lead, searchQuery)}</p>` : "";
+    const leadHtml = frag.lead
+      ? `<p class="card-lead">${highlightMatches(frag.lead, searchQuery)}</p>`
+      : "";
     const excerptHtml = highlightMatches(excerptText, searchQuery);
+
+    const dossier = frag.isResearchable ? getDossier(frag.id) : null;
+    const researchBadgeHtml =
+      dossier && dossier.progress > 0
+        ? `<span class="card-research-pill" data-open-research="${escapeHtml(frag.id)}" title="Open AI Research Dossier (${escapeHtml(dossier.stage)})">
+            <span class="research-dot" aria-hidden="true"></span>
+            <span>Research &middot; ${dossier.progress}%</span>
+          </span>`
+        : "";
 
     return `
       <article
@@ -166,7 +216,10 @@
               <span class="card-num">${escapeHtml(frag.numberLabel)}</span>
               <span class="card-part">${escapeHtml(frag.part)}</span>
             </div>
-            <span class="card-category">${escapeHtml(frag.category)}</span>
+            <div class="card-meta-right">
+              ${researchBadgeHtml}
+              <span class="card-category">${escapeHtml(frag.category)}</span>
+            </div>
           </div>
           <h3 class="card-title">${titleHtml}</h3>
           ${leadHtml}
@@ -181,7 +234,7 @@
     `;
   }
 
-  // Render Archive Grid (grouped by Del 1, Del 2, Del 3, Who am i? when showing all)
+  // Render Archive Grid
   function renderArchive() {
     const filtered = getFilteredFragments();
 
@@ -259,18 +312,21 @@
         return `
           <div class="toc-part-heading">${escapeHtml(partName)}</div>
           ${items
-            .map(
-              (f) => `
-              <button
-                type="button"
-                class="toc-item${f.id === currentReaderId ? " active" : ""}"
-                data-toc-id="${escapeHtml(f.id)}"
-              >
-                <span class="toc-item-num">${escapeHtml(f.numberLabel)}</span>
-                <span>${escapeHtml(f.title)}</span>
-              </button>
-            `
-            )
+            .map((f) => {
+              const hasActiveResearch =
+                f.isResearchable && researchStore[f.id] && researchStore[f.id].progress > 0;
+              return `
+                <button
+                  type="button"
+                  class="toc-item${f.id === currentReaderId ? " active" : ""}"
+                  data-toc-id="${escapeHtml(f.id)}"
+                >
+                  <span class="toc-item-num">${escapeHtml(f.numberLabel)}</span>
+                  <span class="toc-item-label">${escapeHtml(f.title)}</span>
+                  ${hasActiveResearch ? '<span class="toc-research-dot" title="Active AI Research Dossier"></span>' : ""}
+                </button>
+              `;
+            })
             .join("")}
         `;
       })
@@ -289,14 +345,8 @@
     }
   }
 
-  // Open Reader for a specific Fragment ID
-  function openReader(fragmentId, updateHash = true) {
-    const frag = enrichedFragments.find((f) => f.id === String(fragmentId));
-    if (!frag) return;
-
-    currentReaderId = frag.id;
-    readerCrumb.textContent = `${frag.part} · Fragment ${frag.numberLabel.replace(/[:.]$/, "")}`;
-
+  // Render Original Verbatim Fragment Tab Body
+  function renderOriginalBodyHtml(frag) {
     const blocksHtml = frag.blocks
       .map((block) => {
         if (block.type === "h3") {
@@ -315,6 +365,194 @@
       })
       .join("");
 
+    return `
+      ${frag.lead ? `<p class="reader-lead">${escapeHtml(frag.lead)}</p>` : ""}
+      <div class="reader-prose">
+        ${blocksHtml}
+      </div>
+    `;
+  }
+
+  // Render AI Research Dossier Tab Body
+  function renderDossierBodyHtml(frag) {
+    const d = getDossier(frag.id);
+    const isQueued = d.progress === 0;
+
+    const milestonesHtml = (d.milestones || [])
+      .map((m) => {
+        const stateClass = m.done ? "milestone-item--done" : "milestone-item--pending";
+        const icon = m.done ? "&#10003;" : "";
+        return `
+          <li class="milestone-item ${stateClass}">
+            <span class="milestone-check" aria-hidden="true">${icon}</span>
+            <span>${escapeHtml(m.label)}</span>
+          </li>
+        `;
+      })
+      .join("");
+
+    const findingsSectionHtml =
+      d.findings && d.findings.length > 0
+        ? `
+          <section class="dossier-section">
+            <h3 class="dossier-section-title">Research Findings &amp; Analysis</h3>
+            <div class="findings-stack">
+              ${d.findings
+                .map(
+                  (f) => `
+                  <div class="finding-card">
+                    <h4 class="finding-title">${escapeHtml(f.title)}</h4>
+                    <p class="finding-detail">${escapeHtml(f.detail)}</p>
+                  </div>
+                `
+                )
+                .join("")}
+            </div>
+          </section>
+        `
+        : "";
+
+    const citationsSectionHtml =
+      d.citations && d.citations.length > 0
+        ? `
+          <section class="dossier-section">
+            <h3 class="dossier-section-title">Verified Literature &amp; Sources</h3>
+            <div class="citations-stack">
+              ${d.citations
+                .map((c) => {
+                  const titleNode = c.url
+                    ? `<a href="${escapeHtml(c.url)}" target="_blank" rel="noopener noreferrer" class="citation-title">${escapeHtml(c.title)} &nearr;</a>`
+                    : `<span class="citation-title">${escapeHtml(c.title)}</span>`;
+                  return `
+                    <div class="citation-card">
+                      <div class="citation-header">
+                        ${titleNode}
+                        <span class="citation-authors">${escapeHtml(c.authors)} (${escapeHtml(c.year)})</span>
+                      </div>
+                      <p class="citation-relevance">${escapeHtml(c.relevance)}</p>
+                    </div>
+                  `;
+                })
+                .join("")}
+            </div>
+          </section>
+        `
+        : "";
+
+    const nextStepsHtml =
+      d.nextSteps && d.nextSteps.length > 0
+        ? `
+          <section class="dossier-section">
+            <h3 class="dossier-section-title">Next Agent Actions</h3>
+            <ol class="next-steps-list">
+              ${d.nextSteps.map((step) => `<li>${escapeHtml(step)}</li>`).join("")}
+            </ol>
+            ${
+              isQueued
+                ? `<div class="agent-dispatch-hint">
+                    <strong>Ready for AI Research:</strong> Ask your agent in this repository:
+                    <code>Research Idea #${escapeHtml(frag.id)} and update its dossier</code>
+                  </div>`
+                : ""
+            }
+          </section>
+        `
+        : "";
+
+    const agentMetaHtml =
+      d.agentName || d.updatedAt
+        ? `
+          <div class="dossier-agent-meta">
+            <span>${escapeHtml(d.agentName || "AI Research Agent")}</span>
+            ${d.updatedAt ? `<span>Updated ${escapeHtml(d.updatedAt)}</span>` : ""}
+          </div>
+        `
+        : "";
+
+    return `
+      <div class="dossier-view">
+        <div class="dossier-hero-card">
+          <div class="dossier-status-row">
+            <span class="dossier-stage-pill${isQueued ? " dossier-stage-pill--queued" : ""}">
+              ${!isQueued ? '<span class="research-dot" aria-hidden="true"></span>' : ""}
+              <span>${escapeHtml(d.stage)}</span>
+            </span>
+            <span class="dossier-pct">${d.progress}%</span>
+          </div>
+          <div class="dossier-bar-track" role="progressbar" aria-valuenow="${d.progress}" aria-valuemin="0" aria-valuemax="100">
+            <div class="dossier-bar-fill" style="width: ${d.progress}%"></div>
+          </div>
+          ${agentMetaHtml}
+          <p class="dossier-summary">${escapeHtml(d.summary)}</p>
+        </div>
+
+        <section class="dossier-section">
+          <h3 class="dossier-section-title">Milestones</h3>
+          <ul class="milestone-list">
+            ${milestonesHtml}
+          </ul>
+        </section>
+
+        ${findingsSectionHtml}
+        ${citationsSectionHtml}
+        ${nextStepsHtml}
+      </div>
+    `;
+  }
+
+  // Open Reader for a specific Fragment ID and optional Tab ("fragment" | "research")
+  function openReader(fragmentId, updateHash = true, requestedTab = null) {
+    const frag = enrichedFragments.find((f) => f.id === String(fragmentId));
+    if (!frag) return;
+
+    currentReaderId = frag.id;
+    if (requestedTab) {
+      currentReaderTab = requestedTab;
+    }
+    if (!frag.isResearchable) {
+      currentReaderTab = "fragment";
+    }
+
+    readerCrumb.textContent = `${frag.part} · Fragment ${frag.numberLabel.replace(/[:.]$/, "")}`;
+
+    const dossier = frag.isResearchable ? getDossier(frag.id) : null;
+    const badgeLabel = dossier ? (dossier.progress > 0 ? `${dossier.progress}%` : "Queued") : "";
+    const badgeClass =
+      dossier && dossier.progress > 0
+        ? "reader-tab-badge reader-tab-badge--active"
+        : "reader-tab-badge";
+
+    const tabsHtml = frag.isResearchable
+      ? `
+        <div class="reader-tabs" role="tablist" aria-label="Fragment view mode">
+          <button
+            type="button"
+            class="reader-tab${currentReaderTab === "fragment" ? " active" : ""}"
+            role="tab"
+            aria-selected="${currentReaderTab === "fragment"}"
+            data-reader-tab="fragment"
+          >
+            <span>Original Fragment</span>
+          </button>
+          <button
+            type="button"
+            class="reader-tab${currentReaderTab === "research" ? " active" : ""}"
+            role="tab"
+            aria-selected="${currentReaderTab === "research"}"
+            data-reader-tab="research"
+          >
+            <span>AI Research Dossier</span>
+            <span class="${badgeClass}">${escapeHtml(badgeLabel)}</span>
+          </button>
+        </div>
+      `
+      : "";
+
+    const tabContentHtml =
+      currentReaderTab === "research" && frag.isResearchable
+        ? renderDossierBodyHtml(frag)
+        : renderOriginalBodyHtml(frag);
+
     readerArticle.innerHTML = `
       <div class="reader-meta-top">
         <span class="reader-num-badge">${escapeHtml(frag.numberLabel)}</span>
@@ -323,10 +561,8 @@
         <span class="reader-category-tag">${frag.readMinutes} min read</span>
       </div>
       <h2 class="reader-title" id="readerArticleTitle">${escapeHtml(frag.title)}</h2>
-      ${frag.lead ? `<p class="reader-lead">${escapeHtml(frag.lead)}</p>` : ""}
-      <div class="reader-prose">
-        ${blocksHtml}
-      </div>
+      ${tabsHtml}
+      ${tabContentHtml}
     `;
 
     // Prev / Next Pagination
@@ -358,7 +594,6 @@
 
     renderToc();
 
-    // Auto-collapse TOC on narrow viewports so article text takes full screen
     if (window.innerWidth <= 900) {
       readerToc.classList.add("collapsed");
       tocToggleBtn.setAttribute("aria-expanded", "false");
@@ -376,7 +611,9 @@
     }
 
     if (updateHash) {
-      history.replaceState(null, "", `#fragment-${frag.id}`);
+      const suffix =
+        currentReaderTab === "research" && frag.isResearchable ? "/research" : "";
+      history.replaceState(null, "", `#fragment-${frag.id}${suffix}`);
     }
   }
 
@@ -437,7 +674,7 @@
     card.addEventListener("click", () => {
       const targetPart = card.dataset.jumpPart;
       if (targetPart === "Who am i?") {
-        openReader("0");
+        openReader("0", true, "fragment");
         return;
       }
       activePart = targetPart;
@@ -451,11 +688,17 @@
     });
   });
 
-  // Card clicks & keyboard activation
+  // Card clicks (clicking research badge opens directly to AI Research Dossier tab!)
   fragmentsContainer.addEventListener("click", (e) => {
+    const researchPill = e.target.closest("[data-open-research]");
+    if (researchPill) {
+      e.stopPropagation();
+      openReader(researchPill.dataset.openResearch, true, "research");
+      return;
+    }
     const card = e.target.closest(".fragment-card");
     if (!card) return;
-    openReader(card.dataset.fragmentId);
+    openReader(card.dataset.fragmentId, true, "fragment");
   });
 
   fragmentsContainer.addEventListener("keydown", (e) => {
@@ -463,18 +706,25 @@
       const card = e.target.closest(".fragment-card");
       if (!card) return;
       e.preventDefault();
-      openReader(card.dataset.fragmentId);
+      openReader(card.dataset.fragmentId, true, "fragment");
     }
   });
 
-  // Buttons
-  startReadingBtn.addEventListener("click", () => openReader("1"));
-  openOriginBtn.addEventListener("click", () => openReader("0"));
+  // Reader Tab clicks (Original Fragment vs AI Research Dossier)
+  readerArticle.addEventListener("click", (e) => {
+    const tabBtn = e.target.closest("[data-reader-tab]");
+    if (!tabBtn || !currentReaderId) return;
+    openReader(currentReaderId, true, tabBtn.dataset.readerTab);
+  });
+
+  // Header & Hero Buttons
+  startReadingBtn.addEventListener("click", () => openReader("1", true, "fragment"));
+  openOriginBtn.addEventListener("click", () => openReader("0", true, "fragment"));
 
   randomFragmentBtn.addEventListener("click", () => {
     const pool = enrichedFragments.filter((f) => f.id !== currentReaderId);
     const chosen = pool[Math.floor(Math.random() * pool.length)] || enrichedFragments[0];
-    if (chosen) openReader(chosen.id);
+    if (chosen) openReader(chosen.id, true, "fragment");
   });
 
   // Reader Controls
@@ -532,7 +782,6 @@
 
   // Global Keyboard Shortcuts
   document.addEventListener("keydown", (e) => {
-    // Slash focuses search when reader is closed
     if (
       e.key === "/" &&
       readerOverlay.hidden &&
@@ -562,19 +811,41 @@
     }
   });
 
-  // Deep-link hash routing (#fragment-8, #fragment-0, etc.)
+  // Deep-link hash routing (#fragment-8 or #fragment-8/research)
   function checkUrlHash() {
-    const match = window.location.hash.match(/^#fragment-(.+)$/);
+    const match = window.location.hash.match(/^#fragment-([^/]+)(?:\/(research))?$/);
     if (match) {
-      openReader(decodeURIComponent(match[1]), false);
+      const id = decodeURIComponent(match[1]);
+      const tab = match[2] === "research" ? "research" : "fragment";
+      openReader(id, false, tab);
     }
   }
 
   window.addEventListener("hashchange", checkUrlHash);
+
+  // Live fetch of data/research.json over HTTP/HTTPS (in case an agent commits JSON directly)
+  async function refreshResearchJson() {
+    if (!/^https?:$/i.test(window.location.protocol)) return;
+    try {
+      const res = await fetch("data/research.json", { cache: "no-cache" });
+      if (!res.ok) return;
+      const json = await res.json();
+      if (json && typeof json.dossiers === "object") {
+        researchStore = json.dossiers;
+        renderArchive();
+        if (currentReaderId) {
+          openReader(currentReaderId, false);
+        }
+      }
+    } catch {
+      // Fallback to bundled window.IDEA_RESEARCH from data/research.js
+    }
+  }
 
   // Initialize
   applyReaderPreferences();
   renderTopicPills();
   renderArchive();
   checkUrlHash();
+  refreshResearchJson();
 })();

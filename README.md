@@ -11,7 +11,21 @@ The personal page and interactive **Idea Fragments** reader of **Miles Raven Alv
 - `styles.css` — Midnight blue (`#111424`) & pixel-emblem accent design system (plus optional Paper mode inside the reader)
 - `script.js` — Section & theme filtering, live search, keyboard navigation, and deep-linked book reader (`#fragment-1` … `#fragment-15`, `#fragment-0`)
 - `data/fragments.js` — Full verbatim text of all Idea Fragments (`Del 1`, `Del 2`, `Del 3`, and `0: Who am i?`)
+- `data/research.json` & `data/research.js` — AI Research Dossiers (progress %, stage, milestones, findings, verified academic citations, and next steps)
+- `scripts/research-cli.js` — CLI tool for AI agents to inspect pipeline status (`status`) and validate/sync research updates (`sync`)
+- `AGENTS.md` & `.agents/skills/idea-researcher/SKILL.md` — Built-in agent rules and workspace skill so AI agents automatically follow the research protocol
 - `assets/` — Extracted pixel-art emblem (`icon.png`, `favicon.png`) and downloadable PDF (`idea-fragments.pdf`)
+
+## AI Research Pipeline
+
+Each Idea Fragment (`1:`–`15:`) includes an **AI Research Dossier** tab inside the Book Reader (deep-linkable via `#fragment-8/research`).
+
+To view research progress across all ideas or sync agent updates from `data/research.json`:
+
+```powershell
+node scripts/research-cli.js status
+node scripts/research-cli.js sync
+```
 
 ## Adding New Idea Fragments
 

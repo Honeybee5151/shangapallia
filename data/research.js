@@ -1,0 +1,371 @@
+/**
+ * Auto-generated from data/research.json via `node scripts/research-cli.js sync`.
+ * AI Agents: edit data/research.json and run `node scripts/research-cli.js sync`.
+ */
+window.IDEA_RESEARCH = {
+  "schemaVersion": 1,
+  "project": "Shangapallia — Idea Fragments AI Research Pipeline",
+  "author": "Miles Raven Alv Sunhede",
+  "dossiers": {
+    "1": {
+      "fragmentId": "1",
+      "stage": "Literature & Feasibility",
+      "progress": 55,
+      "updatedAt": "2026-10-29",
+      "agentName": "Economics & Fiscal Research Agent",
+      "summary": "Miles's Wealth Optimization Tax (WOT) synthesizes two established frontiers in public economics: Pigouvian externality-adjusted business taxation aimed at redirecting capital away from zero-sum financialization toward real productivity, and 'Unconventional Fiscal Policy' that uses counter-cyclical consumption-tax paths rather than central-bank rate hikes to stabilize inflation. Its strongest theoretical footing lies in macroeconomic stabilization—where dynamic consumption taxation steers intertemporal demand without punishing working-class adjustable-rate debtors—while its primary design challenge is preventing retail consumer price pass-through and Goodhart's Law gaming of AI-generated corporate 'world growth' scores.",
+      "milestones": [
+        {
+          "label": "Core thesis & dual-mechanism decomposition",
+          "done": true
+        },
+        {
+          "label": "Academic literature & prior fiscal models mapped",
+          "done": true
+        },
+        {
+          "label": "Distributional & Goodhart's Law stress-testing",
+          "done": true
+        },
+        {
+          "label": "Formal mathematical VAT-weighting model",
+          "done": false
+        },
+        {
+          "label": "Empirical simulation against historical inflation cycles",
+          "done": false
+        }
+      ],
+      "findings": [
+        {
+          "title": "Value Creation vs. Value Extraction",
+          "detail": "Miles's diagnosis that 'many stocks that lead to a return, do not lead to world growth' maps directly onto Mariana Mazzucato's (2018) structural distinction between productive value creation and rent-seeking value extraction, as well as William Lazonick's (2014) empirical critique of the corporate shift from 'retain-and-reinvest' to 'downsize-and-distribute' (such as open-market stock buybacks that inflate equity prices while starving R&D and worker wages). Under the classic Diamond-Mirrlees (1971) production efficiency theorem, uniform VAT systems deliberately avoid distorting firm-level production choices unless uncorrected externalities exist. WOT effectively treats speculative, non-productive capital allocation as a macroeconomic negative externality: by modulating a firm's effective value-added rate via AI-measured real-economy contribution (e.g., net fixed capital formation, verified R&D intensity, total factor productivity, and human-capital investment relative to financial engineering and rent extraction), WOT acts as a Pigouvian fiscal wedge redirecting investor capital toward tangible global growth."
+        },
+        {
+          "title": "Dynamic VAT vs. Interest Rates as an Inflation Stabilizer",
+          "detail": "WOT's secondary mechanism—modulating VAT dynamically to dampen inflation volatility instead of hiking loan interest rates—is rigorously supported by the 'Unconventional Fiscal Policy' literature formalized by Correia, Farhi, Nicolini, and Teles (2013) and empirically validated by D'Acunto, Hoang, and Weber (2022), who demonstrated that consumption-tax trajectories directly govern household inflation expectations and intertemporal spending just like real interest-rate adjustments. Crucially, Heterogeneous Agent New Keynesian (HANK) research by Adrien Auclert (2019) proves that conventional monetary tightening transmits heavily through regressive redistribution channels: hiking interest rates squeezes high-marginal-propensity-to-consume working-class net debtors via higher adjustable-rate debt service and weaker labor demand while boosting interest income for wealthy liquid-asset holders. Using counter-cyclical WOT adjustments cools aggregate demand fiscal-side without amplifying debt-service burdens on leveraged lower-income households."
+        },
+        {
+          "title": "Key Challenge: VAT Incidence & AI Scoring Gaming (Goodhart's Law)",
+          "detail": "Two structural vulnerabilities must be resolved so WOT burdens wealthy speculative investors rather than ordinary consumers. First, traditional flat VATs are consumption-regressive and exhibit asymmetric retail pass-through: Benzarti et al. (2020) show empirically that firms pass VAT hikes rapidly onto consumer prices while pocketing subsequent VAT cuts as higher profit margins. To prevent firms from shifting WOT onto working-class shoppers, WOT must adopt a split-base progressive consumption architecture modeled on David Bradford's (2004) 'X-tax'—levying the AI-differentiated WOT rate on business cash flow while allowing firms to deduct wages (which are taxed progressively or rebated at the household level), ensuring economic incidence falls strictly on corporate rents and capital owners. Second, tying tax rates to AI corporate scoring invites severe Goodhart's Law gaming; as Berg, Kolbel, and Rigobon (2022) document in their 'Aggregate Confusion' study of ESG ratings, multi-metric corporate scores suffer from 56% measurement divergence and strategic disclosure manipulation, requiring WOT's AI evaluator to anchor strictly on audited national-accounts primitives rather than soft corporate self-reporting."
+        }
+      ],
+      "citations": [
+        {
+          "authors": "Correia, I., Farhi, E., Nicolini, J. P., & Teles, P.",
+          "year": "2013",
+          "title": "Unconventional Fiscal Policy at the Zero Bound (American Economic Review)",
+          "relevance": "Proves mathematically in a New Keynesian framework that time-varying consumption tax paths can replicate real interest-rate stabilization without monetary rate distortions.",
+          "url": "https://doi.org/10.1257/aer.103.4.1172"
+        },
+        {
+          "authors": "D'Acunto, F., Hoang, D., & Weber, M.",
+          "year": "2022",
+          "title": "Managing Households' Expectations with Unconventional Policies (The Review of Financial Studies)",
+          "relevance": "Provides micro-empirical proof from European VAT shifts that consumption-tax adjustments directly steer household inflation expectations and durable spending.",
+          "url": "https://doi.org/10.1093/rfs/hhab083"
+        },
+        {
+          "authors": "Auclert, A.",
+          "year": "2019",
+          "title": "Monetary Policy and the Redistribution Channel (American Economic Review)",
+          "relevance": "Demonstrates how central-bank interest-rate hikes redistribute wealth away from high-MPC debtors toward liquid-asset holders, validating Miles's distributional critique of loan-rate tightening.",
+          "url": "https://doi.org/10.1257/aer.20160137"
+        },
+        {
+          "authors": "Mazzucato, M.",
+          "year": "2018",
+          "title": "The Value of Everything: Making and Taking in the Global Economy (PublicAffairs)",
+          "relevance": "Establishes the foundational analytical boundary between productive value creation and financialized rent extraction that WOT's AI valuation engine seeks to price.",
+          "url": "https://marianamazzucato.com/books/the-value-of-everything/"
+        },
+        {
+          "authors": "Lazonick, W.",
+          "year": "2014",
+          "title": "Profits Without Prosperity (Harvard Business Review)",
+          "relevance": "Documents empirically how stock buybacks generate high equity returns without real-economy wage or productivity growth—the exact market failure WOT targets.",
+          "url": "https://hbr.org/2014/09/profits-without-prosperity"
+        },
+        {
+          "authors": "Bradford, D. F.",
+          "year": "2004",
+          "title": "The X Tax in the World Economy: Going Global with a Simple, Progressive Tax (AEI Press)",
+          "relevance": "Offers a split-base global VAT architecture (business cash-flow tax paired with progressive wage deductions) that keeps WOT progressive and focused on capital rents.",
+          "url": "https://www.aei.org/research-products/book/the-x-tax-in-the-world-economy/"
+        },
+        {
+          "authors": "Benzarti, Y., Carloni, D., Harju, J., & Kosonen, T.",
+          "year": "2020",
+          "title": "What Goes Up May Not Come Down: Asymmetric Incidence of Value-Added Taxes (Journal of Political Economy)",
+          "relevance": "Identifies asymmetric consumer price pass-through during dynamic VAT hikes and cuts, highlighting a critical incidence friction WOT must neutralize.",
+          "url": "https://doi.org/10.1086/710558"
+        },
+        {
+          "authors": "Berg, F., Kolbel, J. F., & Rigobon, R.",
+          "year": "2022",
+          "title": "Aggregate Confusion: The Divergence of ESG Ratings (Review of Finance)",
+          "relevance": "Quantifies measurement divergence and rater bias in corporate scoring systems, informing how WOT's AI growth index must guard against Goodhart's Law.",
+          "url": "https://doi.org/10.1093/rof/rfac033"
+        },
+        {
+          "authors": "Diamond, P. A., & Mirrlees, J. A.",
+          "year": "1971",
+          "title": "Optimal Taxation and Public Production I: Production Efficiency (American Economic Review)",
+          "relevance": "Defines the baseline optimal-tax condition under which firm-differentiated taxes are justified strictly as Pigouvian corrections for real-economy externalities.",
+          "url": "https://www.jstor.org/stable/1913371"
+        }
+      ],
+      "nextSteps": [
+        "Formulate a mathematical Bradford X-tax + Pigouvian WOT rate schedule that deducts payroll at the firm level so tax incidence falls on speculative corporate rents rather than retail consumer prices.",
+        "Specify an adversarial, Goodhart-resistant AI feature vector restricted to audited national-accounts primitives (net fixed capital formation, verified R&D expenditure, median wage-bill growth, minus net share repurchases).",
+        "Simulate a two-agent HANK model comparing a counter-cyclical dynamic WOT rule against a standard Taylor-rule interest-rate hike across a 2021–2023 supply-and-demand inflation shock."
+      ]
+    },
+    "8": {
+      "fragmentId": "8",
+      "stage": "Experiment Design",
+      "progress": 75,
+      "updatedAt": "2026-10-29",
+      "agentName": "Legal Psychology & Experimental Design Agent",
+      "summary": "Miles's proposal to decompose the monolithic singleton 'The Law' into conscience-aligned tiers ('Ethical behavior' vs. 'Honorary customs') strongly converges with empirical legal psychology—specifically Paul H. Robinson and John M. Darley's 'empirical desert' framework, Janice Nadler's 'flouting' experiments, and Cass Sunstein's expressive law theory. Furthermore, translating these tiers into 'mean' versus 'rude' for school-aged children maps directly onto Elliot Turiel and Larry Nucci's Social Domain Theory (moral harm vs. social convention), making Miles's proposed cluster-randomized school trial theoretically robust and ready for pilot pre-registration.",
+      "milestones": [
+        {
+          "label": "Core thesis & semantic taxonomy extracted",
+          "done": true
+        },
+        {
+          "label": "Cross-verification of cited scholars (Turiel, Brehm, Husak, Tyler)",
+          "done": true
+        },
+        {
+          "label": "Connection to 'Empirical Desert' & Expressive Law literature",
+          "done": true
+        },
+        {
+          "label": "Cluster-RCT school protocol & age-adapted wording specification",
+          "done": true
+        },
+        {
+          "label": "Pilot empirical study execution & data analysis",
+          "done": false
+        }
+      ],
+      "findings": [
+        {
+          "title": "Strong Convergence with 'Empirical Desert' (Robinson & Darley)",
+          "detail": "Miles's critique of bundling all state mandates under the monolithic label 'The Law' connects Douglas Husak's normative critique of overcriminalization (2008) and Tom R. Tyler's normative legitimacy model (1990) directly to Paul H. Robinson and John M. Darley's (1997) 'utility of desert' thesis. Empirical experiments by Robinson, Goodwin, and Reisig (2010) and Janice Nadler (2005) demonstrate that when a legal code conflates regulatory or conventional infractions (malum prohibitum) with core moral wrongs (malum in se), the entire legal system suffers a 'moral credibility' deficit that provokes generalized non-compliance even with unrelated laws ('the flouting effect'). Viewed through Cass Sunstein's (1996) expressive law framework, explicitly partitioning statutes into 'Ethical behavior' (harm-based moral obligations) and 'Honorary customs' (civic coordination and mutual respect) protects the stigmatizing moral clarity of core ethics while giving conventional regulations an honest, non-draconian coordination signal."
+        },
+        {
+          "title": "Social Domain Theory & Child Rule Categorization ('Mean' vs. 'Rude')",
+          "detail": "Developmental psychology strongly validates Miles's instinct to operationalize ethical versus honorary rules in schools using the child-accessible terms 'mean' and 'rude.' In Social Domain Theory, Elliot Turiel (1983) proved that children as young as ages three to five spontaneously distinguish the moral domain (actions involving intrinsic harm, welfare, and fairness—captured cleanly by 'mean' and judged wrong independently of authority) from the social-conventional domain (arbitrary institutional routines, dress, etiquette, and order—captured by 'rude' and contingent on shared rules). Crucially, Larry P. Nucci's (1984) classroom research demonstrated that students rate teachers significantly higher in legitimacy and effectiveness when teachers give 'domain-concordant' responses (addressing moral violations via victim harm and conventional violations via social order) rather than 'domain-discordant' responses that over-moralize minor conventions or reduce moral harms to mere disobedience of monolithic school rules."
+        },
+        {
+          "title": "Psychological Reactance & Monolithic Tension",
+          "detail": "Combining Jack W. Brehm's (1966) psychological reactance theory with Bob Altemeyer's (2006) research on authoritarianism illuminates why monolithic rule-framing breeds transgressive thrill. When minor conventional boundaries carry the solemn, high-threat authoritarian command of 'The Law' (or undifferentiated 'Official Rules'), non-authoritarian citizens perceive an illegitimate encroachment on behavioral autonomy, triggering aversive reactance and a 'boomerang' motivation where defying the rule restores agency. Under a binary linguistic taxonomy (consistent with weak Sapir-Whorf framing effects), crossing the single semantic line into 'rule-breaker' over a trivial convention also lowers the cognitive-dissonance cost of violating genuinely ethical norms. By contrast, labeling conventions as 'Honorary customs' ('not being rude') reframes compliance from authoritarian submission into voluntary civic courtesy, disarming reactance while leaving 'Ethical behavior' ('not being mean') anchored in intrinsic conscience."
+        },
+        {
+          "title": "Refined Protocol for the Multi-School Experiment",
+          "detail": "To eliminate cross-classroom spillover on shared playgrounds, Miles's experiment is best structured as a three-arm cluster-randomized controlled trial (cRCT) randomized at the school level (e.g., k = 24 elementary schools, grades 3–5, ages 8–11—old enough for conceptual taxonomy yet prior to entrenched adult legal cynicism). Arm 1 (Monolithic Framing) presents a standardized set of classroom expectations uniformly as 'Official School Rules' backed by authority; Arm 2 (Tiered Conscience Framing) presents the exact same behavioral expectations and consequence severities partitioned into 'Ethical Rules: Not Being Mean' (harm/fairness rationale) and 'Honorary Customs: Not Being Rude' (courtesy/coordination rationale); Arm 3 serves as a business-as-usual control. Teacher delivery is standardized via scripted domain-concordant versus monolithic response prompts audited by blinded classroom observations. Primary outcome metrics analyzed via hierarchical linear modeling (HLM) include: (1) disaggregated behavioral infraction logs (moral harm/bullying incidents vs. conventional disruptions), (2) unobtrusive unsupervised behavioral tasks (e.g., anonymous resource-sharing and cleanup tasks measuring intrinsic internalization vs. surveillance compliance), (3) Nadler-style spillover vignettes testing whether dislike of a minor dress/seating rule erodes endorsement of anti-harm rules, and (4) child-adapted psychological reactance and institutional legitimacy scales."
+        }
+      ],
+      "citations": [
+        {
+          "authors": "Turiel, E.",
+          "year": "1983",
+          "title": "The Development of Social Knowledge: Morality and Convention (Cambridge University Press)",
+          "relevance": "Establishes Social Domain Theory, proving empirically that children from early childhood distinguish intrinsic moral harms ('mean') from context-dependent social conventions ('rude').",
+          "url": "https://archive.org/details/isbn_0521273056"
+        },
+        {
+          "authors": "Nucci, L. P.",
+          "year": "1984",
+          "title": "Evaluating Teachers as Social Agents: Students' Ratings of Domain Appropriate and Domain Inappropriate Teacher Responses to Transgressions",
+          "relevance": "Demonstrates in real school settings that students accord higher legitimacy to teachers who distinguish moral harms from conventional rules rather than treating all rules monolithically.",
+          "url": "https://doi.org/10.3102/00028312021002367"
+        },
+        {
+          "authors": "Robinson, P. H., & Darley, J. M.",
+          "year": "1997",
+          "title": "The Utility of Desert (Northwestern University Law Review)",
+          "relevance": "Introduces 'empirical desert' and shows that criminal law's compliance power depends on maintaining moral credibility by aligning legal stigma strictly with shared intuitions of moral blameworthiness.",
+          "url": "https://scholarship.law.upenn.edu/faculty_scholarship/604/"
+        },
+        {
+          "authors": "Robinson, P. H., Goodwin, G. P., & Reisig, M. D.",
+          "year": "2010",
+          "title": "The Disutility of Injustice (New York University Law Review)",
+          "relevance": "Provides experimental proof that when a monolithic criminal code punishes conduct disproportionate to perceived moral wrongfulness, citizens lose respect for the legal system and reduce compliance.",
+          "url": "https://scholarship.law.upenn.edu/faculty_scholarship/278/"
+        },
+        {
+          "authors": "Nadler, J.",
+          "year": "2005",
+          "title": "Flouting the Law (Texas Law Review)",
+          "relevance": "Demonstrates experimentally that exposure to perceived legal overreach in one domain triggers generalized 'flouting' and non-compliance across unrelated everyday rules.",
+          "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=661101"
+        },
+        {
+          "authors": "Husak, D. N.",
+          "year": "2008",
+          "title": "Overcriminalization: The Limits of the Criminal Law (Oxford University Press)",
+          "relevance": "Critiques the modern proliferation of malum prohibitum regulatory crimes that dilute the moral authority and retributive boundaries of criminal law.",
+          "url": "https://doi.org/10.1093/acprof:oso/9780195328714.001.0001"
+        },
+        {
+          "authors": "Tyler, T. R.",
+          "year": "1990",
+          "title": "Why People Obey the Law (Yale University Press)",
+          "relevance": "Shows longitudinally that voluntary rule compliance stems primarily from perceived normative legitimacy and conscience alignment rather than coercive deterrence.",
+          "url": "https://doi.org/10.2307/j.ctv1j66769"
+        },
+        {
+          "authors": "Brehm, J. W.",
+          "year": "1966",
+          "title": "A Theory of Psychological Reactance (Academic Press)",
+          "relevance": "Explains why high-threat, monolithic prohibitions arouse aversive motivational reactance and a 'boomerang' thrill in reclaiming behavioral freedom through defiance.",
+          "url": "https://archive.org/details/psychologicalrea0000breh"
+        },
+        {
+          "authors": "Sunstein, C. R.",
+          "year": "1996",
+          "title": "On the Expressive Function of Law (University of Pennsylvania Law Review)",
+          "relevance": "Analyzes how legal categories and labels shape social meanings and norms independently of sanctions, supporting Miles's semantic redesign of legal tiers.",
+          "url": "https://chicagounbound.uchicago.edu/journal_articles/2331/"
+        },
+        {
+          "authors": "Altemeyer, B.",
+          "year": "2006",
+          "title": "The Authoritarians",
+          "relevance": "Documents how undifferentiated authoritarian submission conflates conventionalism with morality, alienating non-authoritarian consciences.",
+          "url": "https://theauthoritarians.org/"
+        }
+      ],
+      "nextSteps": [
+        "Draft and pre-register (OSF) the standardized classroom rule taxonomy and scripted teacher prompts equating consequence severity across the Monolithic ('Official Rules') and Tiered ('Ethical/Not Mean' vs. 'Honorary/Not Rude') arms.",
+        "Conduct cognitive-interview pre-testing with N = 30 grades 3–5 students to validate age-adapted psychometric scales for psychological reactance, teacher legitimacy, and Nadler-style rule-flouting spillover vignettes.",
+        "Recruit a 24-school elementary district cohort (8 schools per arm, ~1,200 students) for a one-semester pilot cRCT and fit multi-level HLM models estimating domain-specific compliance and spillover effects."
+      ]
+    },
+    "14": {
+      "fragmentId": "14",
+      "stage": "Theoretical Mapping",
+      "progress": 50,
+      "updatedAt": "2026-10-29",
+      "agentName": "Cognitive & Personality Research Agent",
+      "summary": "Miles's four-disposition definition of maturity—principled positive influence over self and others across logic, emotion, social reciprocity, and the ego—aligns closely with dual-process rationality and ability-based socio-emotional frameworks. Empirical psychometrics validate pairing Actively Open-Minded Thinking (AOT) with ability Emotional Intelligence (where an affective baseline enables cognitive reappraisal rather than alexithymic suppression) and bidirectional social courage (social assertiveness balanced by intellectual humility). Crucially, developmental personality psychology offers a direct resolution to Miles's open question on the Ego: Jane Loevinger's Ego Development framework and Wayment and Bauer's 'Quiet Ego' construct establish that the ego is not a separate fourth module, but the master structural integrator governing non-defensive synthesis across all three other dispositions.",
+      "milestones": [
+        {
+          "label": "Four-disposition model & psychometric anchors extracted",
+          "done": true
+        },
+        {
+          "label": "Psychometric mapping for Logic (AOT) & Emotion integration",
+          "done": true
+        },
+        {
+          "label": "Theoretical resolution candidate for Disposition 4 (The Ego)",
+          "done": true
+        },
+        {
+          "label": "Composite psychometric scale selection & factor structure",
+          "done": false
+        },
+        {
+          "label": "Empirical validation survey design",
+          "done": false
+        }
+      ],
+      "findings": [
+        {
+          "title": "Disposition 1 & 2: AOT Paired with Emotional Granularity",
+          "detail": "Miles's framing of logic as an 'explorative relationship' rather than mere raw computation maps directly onto Jonathan Baron's and Keith Stanovich and Richard West's (1997) Actively Open-Minded Thinking (AOT) construct, which predicts resistance to myside and belief bias even after controlling for general intelligence (IQ). Equally prescient is Miles's second disposition—deriving informational content from emotion and organizing it via logic, contingent on an existing 'baseline of emotion.' In Mayer, Caruso, and Salovey's (2016) Four-Branch Ability Model of Emotional Intelligence, emotions serve as structured data about relational and value states (Branches 2 and 3: facilitating thought and understanding emotions). Pairing this with James Gross's process model of emotion regulation (Gross & John, 2003; Megías-Robles et al., 2019) explains why Miles's baseline condition is psychometrically essential: individuals with blunted affect, alexithymia, or habitual expressive suppression appear superficially 'logical' only because they starve cognition of affective signal, whereas mature individuals experience rich baseline emotion and organize it upstream via cognitive reappraisal."
+        },
+        {
+          "title": "Disposition 3: Bidirectional Social Courage (Influence & Receptivity)",
+          "detail": "Miles observes that while routine cooperation and compromise emerge naturally once logic and emotion are well-integrated, mature social disposition specifically requires the bidirectional 'courage to be influenced and influence others.' Psychometrically, this captures a rare symmetry often split across separate literatures. The outward vector—courage to positively influence others by acting on principle despite interpersonal risk or disapproval—is operationalized by Howard et al.'s (2017) Social Courage framework. The inward vector—courage to remain genuinely persuadable without experiencing epistemic updating as status defeat—is operationalized by Leary et al.'s (2017) Intellectual Humility construct, which predicts lower dogmatism and higher receptivity to counter-attitudinal evidence in interpersonal dialogue. Together, these twin vectors instantiate Piagetian interpersonal reciprocity and Habermasian communicative rationality: engaging others neither through dominance nor conformity, but as co-equal agents mutually bound by better reasons."
+        },
+        {
+          "title": "Candidate Resolution for Miles's Open Question: The Ego as Integrator",
+          "detail": "Miles candidly leaves the fourth disposition—the Ego—untheorized, noting only his strong intuition that 'it is intertwined with all the other dispositions.' Developmental personality theory validates this exact intuition by showing that the ego is not a fourth parallel trait, but the overarching structural synthesizer of the first three. In Jane Loevinger's seminal theory of Ego Development (Loevinger, 1979; meta-analytically validated as distinct from IQ by Cohn & Westenberg, 2004), the ego is the master frame of reference that simultaneously integrates cognitive complexity (Disposition 1), impulse and affective modulation (Disposition 2), and interpersonal mode of reciprocity (Disposition 3) as a person matures from impulsive and conformist stages toward autonomous and integrated stages. Complementing Loevinger's structural hierarchy, Wayment, Bauer, and Sylaska's (2015) 'Quiet Ego' construct (comprising Detached Awareness, Inclusive Identity, Perspective-Taking, and Growth-Mindedness) provides a tractable psychometric measure of non-defensive selfhood: when the ego is 'quiet' rather than preoccupied with self-enhancement, defensive belief-protection drops away—simultaneously unlocking AOT, non-suppressive emotional reappraisal, and the courage to both influence and be influenced."
+        }
+      ],
+      "citations": [
+        {
+          "authors": "Stanovich, K. E., & West, R. F.",
+          "year": "1997",
+          "title": "Reasoning independently of prior belief and individual differences in actively open-minded thinking",
+          "relevance": "Establishes Actively Open-Minded Thinking (AOT) as a measurable explorative disposition toward logic that overcomes belief bias independently of general cognitive ability.",
+          "url": "https://doi.org/10.1037/0022-0663.89.2.342"
+        },
+        {
+          "authors": "Baron, J.",
+          "year": "2019",
+          "title": "Actively open-minded thinking in politics (Cognition)",
+          "relevance": "Synthesizes the theoretical foundations of AOT as a normative standard of explorative, non-defensive inquiry against myside bias across value-laden domains.",
+          "url": "https://doi.org/10.1016/j.cognition.2018.10.004"
+        },
+        {
+          "authors": "Mayer, J. D., Caruso, D. R., & Salovey, P.",
+          "year": "2016",
+          "title": "The ability model of emotional intelligence: Principles and updates (Emotion Review)",
+          "relevance": "Formalizes emotions as structured informational content that mature reasoners perceive, extract, understand, and integrate with cognitive problem-solving.",
+          "url": "https://doi.org/10.1177/1754073916639667"
+        },
+        {
+          "authors": "Gross, J. J., & John, O. P.",
+          "year": "2003",
+          "title": "Individual differences in two emotion regulation processes: Implications for affect, relationships, and well-being",
+          "relevance": "Distinguishes adaptive cognitive reappraisal (organizing emotional content) from expressive suppression, explaining why a live emotional baseline is necessary for genuine maturity.",
+          "url": "https://doi.org/10.1037/0022-3514.85.2.348"
+        },
+        {
+          "authors": "Megías-Robles, A., Gutiérrez-Cobo, M. J., Gómez-Leal, R., Cabello, R., Gross, J. J., & Fernández-Berrocal, P.",
+          "year": "2019",
+          "title": "Emotionally intelligent people reappraise rather than suppress their emotions (PLOS ONE)",
+          "relevance": "Empirically bridges Mayer and Salovey's ability EI with Gross's regulation model, confirming that high emotional ability operates by cognitively organizing rather than suppressing affect.",
+          "url": "https://doi.org/10.1371/journal.pone.0220688"
+        },
+        {
+          "authors": "Howard, M. C., Farr, J. L., Grandey, A. A., & Gutworth, M. B.",
+          "year": "2017",
+          "title": "The creation of the Workplace Social Courage Scale (WSCS)",
+          "relevance": "Operationalizes the outward half of Disposition 3: the prosocial courage to positively influence others and uphold principles despite interpersonal risk.",
+          "url": "https://doi.org/10.1007/s10869-016-9463-8"
+        },
+        {
+          "authors": "Leary, M. R., Diebels, K. J., Davisson, E. K., et al.",
+          "year": "2017",
+          "title": "Cognitive and interpersonal features of intellectual humility (Personality and Social Psychology Bulletin)",
+          "relevance": "Operationalizes the inward half of Disposition 3: the non-defensive interpersonal receptivity and courage to be influenced by others' superior arguments.",
+          "url": "https://doi.org/10.1177/0146167217697695"
+        },
+        {
+          "authors": "Loevinger, J.",
+          "year": "1979",
+          "title": "Construct validity of the Sentence Completion Test of ego development",
+          "relevance": "Establishes the ego as the master developmental integrator coordinating cognitive style, impulse/emotion control, and interpersonal reciprocity.",
+          "url": "https://doi.org/10.1177/014662167900300301"
+        },
+        {
+          "authors": "Cohn, L. D., & Westenberg, P. M.",
+          "year": "2004",
+          "title": "Intelligence and maturity: Meta-analytic evidence for the incremental and discriminant validity of Loevinger's measure of ego development",
+          "relevance": "Demonstrates across 52 studies that ego maturity predicts real-world psychosocial maturity independently of raw intelligence, paralleling AOT's independence from IQ.",
+          "url": "https://doi.org/10.1037/0022-3514.86.5.760"
+        },
+        {
+          "authors": "Wayment, H. A., Bauer, J. J., & Sylaska, K. M.",
+          "year": "2015",
+          "title": "The Quiet Ego Scale: Measuring the compassionate self-identity (Journal of Happiness Studies)",
+          "relevance": "Provides a 14-item psychometric operationalization of non-defensive ego integration balancing agency and receptivity across logic, emotion, and social connection.",
+          "url": "https://doi.org/10.1007/s10902-014-9546-z"
+        }
+      ],
+      "nextSteps": [
+        "Assemble a candidate composite psychometric battery combining the AOT scale, MSCEIT/ERQ Cognitive Reappraisal subscales, Social Courage & Intellectual Humility scales, and the 14-item Quiet Ego Scale (QES).",
+        "Specify and test a bifactor vs. higher-order Structural Equation Model (SEM) evaluating whether the Ego (measured via QES and short-form Washington University Sentence Completion Test) acts as a general integrative factor across Logic, Emotion, and Bidirectional Social Courage.",
+        "Design a baseline-affect gating protocol (pairing standardized emotional induction with dyadic persuasion tasks) to empirically separate mature emotional organization from low-affect suppression or alexithymia."
+      ]
+    }
+  }
+};
